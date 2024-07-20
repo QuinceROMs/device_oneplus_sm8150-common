@@ -117,7 +117,7 @@ public class KeyHandler implements DeviceKeyHandler {
             // we also have to exit it before setRingerModeInternal because it sets it internally
             final int targetMode = sSupportedSliderRingModes.get(keyCodeValue);
             mNotificationManager.setZenMode(sSupportedSliderZenModes.get(keyCodeValue), null, TAG);
-            mAudioManager.setRingerModeInternal(targetMode)
+            mAudioManager.setRingerModeInternal(targetMode);
             doHapticFeedback(sSupportedSliderHaptics.get(keyCodeValue));
             // make sure ringer mode was set correctly (race condition because setZenMode is async)
             mNeedsRun = true;
