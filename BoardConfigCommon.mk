@@ -22,7 +22,7 @@ TARGET_CPU_VARIANT_RUNTIME := cortex-a76
 
 ifeq (,$(filter %_64,$(TARGET_PRODUCT)))
 TARGET_2ND_ARCH := arm
-TARGET_2ND_ARCH_VARIANT := armv8-a
+TARGET_2ND_ARCH_VARIANT := armv8-2a
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := cortex-a76
@@ -172,9 +172,9 @@ SOONG_CONFIG_ONEPLUS_MSMNILE_SENSORS := ALS_POS_X ALS_POS_Y
 BOARD_AVB_ENABLE := true
 ifneq (user,$(TARGET_BUILD_VARIANT))
 BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 3
-else ifneq (,$(wildcard vendor/aosp/signing/keys/releasekey.key))
+else ifneq (,$(wildcard vendor/bliss-priv/keys/releasekey.key))
 BOARD_AVB_ALGORITHM := SHA256_RSA2048
-BOARD_AVB_KEY_PATH := vendor/aosp/signing/keys/releasekey.key
+BOARD_AVB_KEY_PATH := vendor/bliss-priv/keys/releasekey.key
 else
 BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 3
 endif
@@ -201,4 +201,4 @@ DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += \
     $(VENDOR_PATH)/configs/vintf/oneplus_vendor_framework_compatibility_matrix.xml \
     hardware/qcom-caf/common/vendor_framework_compatibility_matrix.xml \
     hardware/qcom-caf/common/vendor_framework_compatibility_matrix_legacy.xml \
-    vendor/aosp/config/device_framework_matrix.xml
+    vendor/bliss/config/device_framework_matrix.xml
