@@ -79,20 +79,6 @@
             android:summary="@string/slider_mute_media_summary"
             android:defaultValue="false"
             android:persistent="false" />
-
-        <SwitchPreferenceCompat
-            android:key="slider_dialog_enabled"
-            android:title="@string/slider_dialog_enabled_title"
-            android:summary="@string/slider_dialog_enabled_summary"
-            android:defaultValue="true"
-            android:persistent="false" />
-
-        <SwitchPreferenceCompat
-            android:key="slider_doze_enabled"
-            android:title="@string/slider_doze_enabled_title"
-            android:summary="@string/slider_doze_enabled_summary"
-            android:defaultValue="true"
-            android:persistent="false" />
     </PreferenceCategory>
 
 </PreferenceScreen>

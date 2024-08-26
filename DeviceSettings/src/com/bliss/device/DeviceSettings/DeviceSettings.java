@@ -58,8 +58,6 @@ public class DeviceSettings extends PreferenceFragment implements
     private TwoStatePreference mRefreshRate;
     private SwitchPreferenceCompat mFpsInfo;
     private SwitchPreferenceCompat mMuteMediaSwitch;
-    private SwitchPreferenceCompat mSliderDialogSwitch;
-    private SwitchPreferenceCompat mSliderDozeSwitch;
     private ListPreference mReadingMode;
 
     private boolean mInternalFpsStart = false;
@@ -135,16 +133,6 @@ public class DeviceSettings extends PreferenceFragment implements
         mMuteMediaSwitch.setChecked(Constants.getIsMuteMediaEnabled(getContext()));
         mMuteMediaSwitch.setOnPreferenceChangeListener(this);
 
-        mSliderDialogSwitch = findPreference(Constants.NOTIF_DIALOG_ENABLED_KEY);
-        mSliderDialogSwitch.setChecked(Constants.getIsSliderDialogEnabled(getContext()));
-        mSliderDialogSwitch.setOnPreferenceChangeListener(this);
-
-        mSliderDozeSwitch = findPreference(Constants.NOTIF_DIALOG_DOZE_KEY);
-        mSliderDozeSwitch.setChecked(Constants.getIsSliderDozeEnabled(getContext()));
-        mSliderDozeSwitch.setOnPreferenceChangeListener(this);
-
-        updateSliderEnablement();
-
         mDCModeSwitch = findPreference(DCModeSwitch.KEY_DC_SWITCH);
         mDCModeSwitch.setEnabled(DCModeSwitch.isSupported());
         mDCModeSwitch.setChecked(DCModeSwitch.isCurrentlyEnabled());
@@ -214,15 +202,6 @@ public class DeviceSettings extends PreferenceFragment implements
             Boolean enabled = (Boolean) newValue;
             Settings.System.putInt(resolver,
                     Constants.NOTIF_SLIDER_MUTE_MEDIA_KEY, enabled ? 1 : 0);
-        } else if (preference == mSliderDialogSwitch) {
-            Boolean enabled = (Boolean) newValue;
-            Settings.System.putInt(resolver,
-                    Constants.NOTIF_DIALOG_ENABLED_KEY, enabled ? 1 : 0);
-            updateSliderEnablement();
-        } else if (preference == mSliderDozeSwitch) {
-            Boolean enabled = (Boolean) newValue;
-            Settings.System.putInt(resolver,
-                    Constants.NOTIF_DIALOG_DOZE_KEY, enabled ? 1 : 0);
         } else if (preference == mDCModeSwitch) {
             mInternalDCStart = true;
             Boolean enabled = (Boolean) newValue;
@@ -262,14 +241,5 @@ public class DeviceSettings extends PreferenceFragment implements
     private boolean isFPSOverlayRunning() {
         final SharedPreferences prefs = Constants.getDESharedPrefs(getContext());
         return prefs.getBoolean(FPSInfoService.PREF_KEY_FPS_STATE, false);
-    }
-
-    private void updateSliderEnablement() {
-        if (!mAmbientDisplayConfiguration.pulseOnNotificationEnabled(UserHandle.USER_CURRENT)) {
-            mSliderDozeSwitch.setEnabled(false);
-            mSliderDozeSwitch.setSummary(R.string.slider_doze_enabled_doze_disabled_summary);
-            return;
-        }
-        mSliderDozeSwitch.setEnabled(Constants.getIsSliderDialogEnabled(getContext()));
     }
 }

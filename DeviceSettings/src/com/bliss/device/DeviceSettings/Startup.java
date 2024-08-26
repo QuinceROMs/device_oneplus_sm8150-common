@@ -75,6 +75,7 @@ public class Startup extends BroadcastReceiver {
                 // must use commit (and not apply) because of what follows!
                 dePrefsEditor.commit();
                 oldPrefsEditor.commit();
+            }
 
             // disable unavailable tiles
             if (!ReadingModeSwitch.isSupported()) {
@@ -85,9 +86,8 @@ public class Startup extends BroadcastReceiver {
                     pm.setComponentEnabledSetting(cn, COMPONENT_ENABLED_STATE_DISABLED, 0);
             }
         }
-    }
 
-              // restoring state from DE shared preferences
+        // restoring state from DE shared preferences
         for (Map.Entry<String, String> set : sKeyFileMap.entrySet()) {
             final String prefKey = set.getKey();
             final String file = set.getValue();

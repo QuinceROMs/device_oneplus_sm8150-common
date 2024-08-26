@@ -111,7 +111,7 @@ public class TouchKeyHandler implements DeviceKeyHandler {
                 "DeviceKeyHandler:TouchscreenGestureProximityWakeLock");
         mContext.registerReceiver(mUpdateReceiver,
                 new IntentFilter(Constants.UPDATE_PREFS_ACTION));
-        }
+    }
 
     public KeyEvent handleKeyEvent(final KeyEvent event) {
         final int action = mActionMapping.get(event.getScanCode(), -1);
@@ -242,14 +242,5 @@ public class TouchKeyHandler implements DeviceKeyHandler {
                 mVibrator.vibrate(VibrationEffect.get(VibrationEffect.EFFECT_HEAVY_CLICK));
             }
         }
-    }
-
-    private Intent getLaunchableIntent(Intent intent) {
-        PackageManager pm = mContext.getPackageManager();
-        List<ResolveInfo> resInfo = pm.queryIntentActivities(intent, 0);
-        if (resInfo.isEmpty()) {
-            return null;
-        }
-        return pm.getLaunchIntentForPackage(resInfo.get(0).activityInfo.packageName);
     }
 }
