@@ -95,7 +95,10 @@
 
     <!-- Whether devices supports in-display fingerprint when screen is off -->
     <bool name="config_supportScreenOffUdfps">true</bool>
-    
+
+    <!-- Whether the device supports Smart Pixels -->
+    <bool name="config_supportSmartPixels">true</bool>
+
     <!-- Display color inversion availability -->
     <bool name="config_displayInversionAvailable">false</bool>
 
